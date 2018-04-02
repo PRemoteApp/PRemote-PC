@@ -1,6 +1,7 @@
 import hashlib
 import sys
-
+import pyrebase
+import json
 
 def get_user():
     # try to get mail from terminal
@@ -43,4 +44,23 @@ def get_user():
 
 # get command line arguments of mail and password
 user = get_user();
-print(user)
+
+firebaseConfig = json.load(open('google-services.json'))
+
+# Initialize Firebase config
+config = {
+  "apiKey": firebaseConfig['client'][0]['api_key'][0]['current_key'],
+  "authDomain": firebaseConfig['project_info']['project_id']+".firebaseapp.com",
+  "databaseURL": "https://"+firebaseConfig['project_info']['project_id']+".firebaseio.com",
+  "storageBucket": firebaseConfig['project_info']['project_id']+".appspot.com"
+}
+
+firebase = pyrebase.initialize_app(config)
+
+# Get a refference to the auth service
+auth = firebase.auth()
+
+# Sign in
+user = auth.sign_in_with_email_and_password(user[0], user[1])
+
+print(user[0])
