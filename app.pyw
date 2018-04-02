@@ -2,6 +2,10 @@ import hashlib
 import sys
 import pyrebase
 import json
+from os.path import expanduser
+import os
+import random
+import webbrowser
 
 def get_user():
     # try to get mail from terminal
@@ -44,6 +48,18 @@ def get_user():
 def listen_incoming_command(data):
     command = data['data']
 
+    if "გახსენი" in command or "ჩართე" in command or "open" in command:
+        if "მუსიკა" in command or "სიმღერა" in command or "music" in command or "song" in command:
+            musicFolder = expanduser("~")+"/Music/"
+            songs = os.listdir(musicFolder)
+            webbrowser.open(musicFolder+random.choice(songs))
+        else:
+            listOfQueryWords = command.split(" ")
+            queryWord = ""
+            for i in range(len(listOfQueryWords)):
+                if i:
+                    queryWord += listOfQueryWords[i]+"+"
+            webbrowser.open('https://www.google.com/search?q='+queryWord+'&btnI')
 
 def formatMail(mail):
     return mail.replace(".", ",")
