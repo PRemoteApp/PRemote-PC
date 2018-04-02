@@ -41,6 +41,13 @@ def get_user():
         data_file.close()
         return users_info
 
+def listen_incoming_command(data):
+    command = data['data']
+
+
+def formatMail(mail):
+    return mail.replace(".", ",")
+
 
 # get command line arguments of mail and password
 user = get_user();
@@ -63,4 +70,8 @@ auth = firebase.auth()
 # Sign in
 user = auth.sign_in_with_email_and_password(user[0], user[1])
 
-print(user[0])
+# Get database instance
+db = firebase.database().child('commands')
+
+# Start 'listening' to database change
+db.child(formatMail(user['email'])).stream(listen_incoming_command)
