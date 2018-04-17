@@ -5,6 +5,7 @@ import json
 from os.path import expanduser
 import os
 import random
+from easygui import enterbox
 import webbrowser
 
 def get_user():
@@ -29,12 +30,12 @@ def get_user():
             mail_input = ""
             pass_input = ""
             while("@" not in mail_input):
-                mail_input = input("Enter your E-Mail: ")
+                mail_input = enterbox(msg="Enter your E-Mail:", title="Sign in")
                 if("@" not in mail_input):
                     print("Wrong E-Mail formatting")
             users_info[0] = mail_input
             while(len(pass_input)<5):
-                pass_input = input("Enter your Password: ")
+                pass_input = enterbox(msg="Enter your Password:", title="Sign in")
                 if(len(pass_input)<5):
                     print("Please enter correct password")
             users_info[1] = pass_input
