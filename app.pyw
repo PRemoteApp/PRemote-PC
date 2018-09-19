@@ -1,4 +1,3 @@
-import hashlib
 import sys
 import pyrebase
 import json
@@ -7,6 +6,7 @@ import os
 import random
 from easygui import enterbox
 import webbrowser
+
 
 def get_user():
     # try to get mail from terminal
@@ -30,13 +30,15 @@ def get_user():
             mail_input = ""
             pass_input = ""
             while("@" not in mail_input):
-                mail_input = enterbox(msg="Enter your E-Mail:", title="Sign in")
+                mail_input = enterbox(
+                    msg="Enter your E-Mail:", title="Sign in")
                 if("@" not in mail_input):
                     print("Wrong E-Mail formatting")
             users_info[0] = mail_input
-            while(len(pass_input)<5):
-                pass_input = enterbox(msg="Enter your Password:", title="Sign in")
-                if(len(pass_input)<5):
+            while(len(pass_input) < 5):
+                pass_input = enterbox(
+                    msg="Enter your Password:", title="Sign in")
+                if(len(pass_input) < 5):
                     print("Please enter correct password")
             users_info[1] = pass_input
 
@@ -45,6 +47,7 @@ def get_user():
             data_file.write(users_info[0]+":"+users_info[1])
         data_file.close()
         return users_info
+
 
 def listen_incoming_command(data):
     command = data['data']
@@ -60,14 +63,16 @@ def listen_incoming_command(data):
             for i in range(len(listOfQueryWords)):
                 if i:
                     queryWord += listOfQueryWords[i]+"+"
-            webbrowser.open('https://www.google.com/search?q='+queryWord+'&btnI')
+            webbrowser.open(
+                'https://www.google.com/search?q='+queryWord+'&btnI')
+
 
 def formatMail(mail):
     return mail.replace(".", ",")
 
 
 # get command line arguments of mail and password
-user = get_user();
+user = get_user()
 
 firebaseConfig = json.load(open('google-services.json'))
 
