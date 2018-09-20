@@ -70,11 +70,25 @@ def listen_incoming_command(data):
 def formatMail(mail):
     return mail.replace(".", ",")
 
+def get_firebase_config():
+    try:
+        return json.load(open('google-services.json'))
+
+    except FileNotFoundError as e:
+        firebase_data_input = enterbox(
+            msg="Paste your Firebase Config here!", title="Setup of Firebase Config")
+        data_file = open("google-services.json", "w+")
+        data_file.write(firebase_data_input)
+        data_file.close()
+        return json.load(open('google-services.json'))
+
+
+# Get firebase config
+firebaseConfig = get_firebase_config()
 
 # get command line arguments of mail and password
 user = get_user()
 
-firebaseConfig = json.load(open('google-services.json'))
 
 # Initialize Firebase config
 config = {
