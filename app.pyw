@@ -4,7 +4,7 @@ import json
 from os.path import expanduser
 import os
 import random
-from easygui import enterbox
+from easygui import enterbox, passwordbox
 import webbrowser
 
 
@@ -36,7 +36,7 @@ def get_user():
                     print("Wrong E-Mail formatting")
             users_info[0] = mail_input
             while(len(pass_input) < 5):
-                pass_input = enterbox(
+                pass_input = passwordbox(
                     msg="Enter your Password:", title="Sign in")
                 if(len(pass_input) < 5):
                     print("Please enter correct password")
