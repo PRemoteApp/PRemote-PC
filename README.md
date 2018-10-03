@@ -1,16 +1,19 @@
-<img src="https://user-images.githubusercontent.com/37747169/38216106-d74a953e-36da-11e8-9028-684ea87c70fa.png" width=200>
-<br>
+<p align="center"><img src="https://user-images.githubusercontent.com/37747169/46416590-ee9a8480-c738-11e8-8de2-ef8957e46596.png" align="center" width=50%></p>
 
 # PRemote-PC
 Remote PC controll application made during EUhack - Free Hacking.
 This repository is PC side of PRemote.
 
-### What is it?3
+### What is it?
 PRemote is an application that allows you to control your PC from mobile.
 
 ### How to run?
 
 1. Download the mobile and desktop app
+```
+git clone https://github.com/PRemoteApp/PRemote-PC
+git clone https://github.com/PRemoteApp/PRemote-Android
+```
 2. &emsp;Setup ![firebase](https://firebase.google.com/) & Download google-services.json <br>
  &emsp;Copy it and paste it to ./PRemote-PC/ Folder <br>
  &emsp;and to ./PRemote-Android/app/ Folder <br>
