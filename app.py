@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import sys
 import pyrebase
 import json
@@ -82,32 +84,36 @@ def get_firebase_config():
         data_file.close()
         return json.load(open('google-services.json'))
 
+def main():
+    # Get firebase config
+    firebaseConfig = get_firebase_config()
 
-# Get firebase config
-firebaseConfig = get_firebase_config()
-
-# get command line arguments of mail and password
-user = get_user()
+    # get command line arguments of mail and password
+    user = get_user()
 
 
-# Initialize Firebase config
-config = {
-  "apiKey": firebaseConfig['client'][0]['api_key'][0]['current_key'],
-  "authDomain": firebaseConfig['project_info']['project_id']+".firebaseapp.com",
-  "databaseURL": "https://"+firebaseConfig['project_info']['project_id']+".firebaseio.com",
-  "storageBucket": firebaseConfig['project_info']['project_id']+".appspot.com"
-}
+    # Initialize Firebase config
+    config = {
+      "apiKey": firebaseConfig['client'][0]['api_key'][0]['current_key'],
+      "authDomain": firebaseConfig['project_info']['project_id']+".firebaseapp.com",
+      "databaseURL": "https://"+firebaseConfig['project_info']['project_id']+".firebaseio.com",
+      "storageBucket": firebaseConfig['project_info']['project_id']+".appspot.com"
+    }
 
-firebase = pyrebase.initialize_app(config)
+    firebase = pyrebase.initialize_app(config)
 
-# Get a refference to the auth service
-auth = firebase.auth()
+    # Get a refference to the auth service
+    auth = firebase.auth()
 
-# Sign in
-user = auth.sign_in_with_email_and_password(user[0], user[1])
+    # Sign in
+    user = auth.sign_in_with_email_and_password(user[0], user[1])
 
-# Get database instance
-db = firebase.database().child('commands')
+    # Get database instance
+    db = firebase.database().child('commands')
 
-# Start 'listening' to database change
-db.child(formatMail(user['email'])).stream(listen_incoming_command)
+    # Start 'listening' to database change
+    db.child(formatMail(user['email'])).stream(listen_incoming_command)
+
+
+if __name__ == '__main__':
+    main()
