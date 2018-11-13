@@ -1,6 +1,7 @@
 <p align="center"><img src="https://user-images.githubusercontent.com/37747169/46416590-ee9a8480-c738-11e8-8de2-ef8957e46596.png" align="center" width=50%></p>
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/917606d835134c57b176c628a92c78b4)](https://www.codacy.com/app/Khukhuna/PRemote-PC?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Khukhuna/PRemote-PC&amp;utm_campaign=Badge_Grade)
+![test](https://api.travis-ci.com/Khukhuna/PRemote-PC.svg?branch=master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/917606d835134c57b176c628a92c78b4)](https://www.codacy.com/app/Khukhuna/PRemote-PC?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Khukhuna/PRemote-PC&amp;utm_campaign=Badge_Grade)
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 
 # PRemote-PC
 Remote PC controll application made during EUhack - Free Hacking.
