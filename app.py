@@ -8,6 +8,7 @@ import os
 import random
 from easygui import enterbox, passwordbox
 import webbrowser
+import re
 
 
 def get_user():
@@ -31,7 +32,7 @@ def get_user():
         if(users_info[0] == "" or users_info[1] == ""):
             mail_input = ""
             pass_input = ""
-            while("@" not in mail_input):
+            while not validate_email(mail_input):
                 mail_input = enterbox(
                     msg="Enter your E-Mail:", title="Sign in")
                 if("@" not in mail_input):
@@ -71,6 +72,11 @@ def listen_incoming_command(data):
 
 def formatMail(mail):
     return mail.replace(".", ",")
+
+def validate_email(mail):
+    if not re.match(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", mail):
+        return False
+    return True
 
 def get_firebase_config():
     try:
